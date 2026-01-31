@@ -1,4 +1,4 @@
-package io.github.emilyfiirst.project;
+package io.github.emilyfiirst.workshop;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

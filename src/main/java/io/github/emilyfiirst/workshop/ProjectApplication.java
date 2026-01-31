@@ -1,4 +1,4 @@
-package io.github.emilyfiirst.project;
+package io.github.emilyfiirst.workshop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
