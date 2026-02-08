@@ -2,8 +2,11 @@ package io.github.emilyfiirst.workshop.services;
 
 import io.github.emilyfiirst.workshop.entities.User;
 import io.github.emilyfiirst.workshop.repositories.UserRepository;
+import io.github.emilyfiirst.workshop.services.exceptions.DatabaseException;
 import io.github.emilyfiirst.workshop.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +32,17 @@ public class UserService {
     }
 
     public void delete(Long id) {
-        repository.deleteById(id);
+        try {
+            if (repository.existsById(id)) {
+                repository.deleteById(id);
+            } else {
+                throw new ResourceNotFoundException(id);
+            }
+        }
+        catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
+        }
+
     }
 
     public User update(Long id, User obj) {
